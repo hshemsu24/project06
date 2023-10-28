@@ -1,0 +1,163 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  width: 80em;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+button{
+  margin: 1em;
+}
+
+ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+img{
+  height: 10em;
+}
+
+
+html,
+body,
+div,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Base Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background: radial-gradient(rgb(96, 193, 215), white);
+  color: #333;
+}
+
+/* Header Styles */
+.header {
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 50px;
+}
+
+.header h4 {
+  font-size: 18px;
+}
+
+.main_content {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.filters{
+  width: 80em;
+  display: inline-block;
+}
+/* Form and Input Styles */
+input[type="text"] {
+  
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+/* Button Styles */
+button {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+select{
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+/* Card Container Styles */
+.dog-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.dog-card {
+  background: radial-gradient(rgb(213, 218, 220), rgb(219, 150, 207));  
+  border: 1px solid #000000;
+  padding: 10px;
+  margin: 10px;
+  align-self: center;
+}
+
+ul {
+  display: flex;  
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  
+}
+
+p {
+  margin: 10px;
+  font-size: 17px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  /* Styles for smaller screens */
+  .main-content {
+    padding: 10px;
+  }
+}
