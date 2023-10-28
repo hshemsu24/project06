@@ -1,8 +1,13 @@
 
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Bar} from 'react-chartjs-2';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import DogCard from './components/DogCard';
+import BreedFrequencyChart from './components/BreedFrequencyChart';
+import WeightFrequencyChart from './components/WeightFrequencyChart';
+import DogDetail from './components/DogDetail';
+import { Link } from 'react-router-dom';
 
 const App = () => {
   const dogAPI = 'https://api.thedogapi.com/v1/images/search';
@@ -23,6 +28,7 @@ const App = () => {
         const data = await response.json();
         setDogs(data);
         setFilteredDogs(data);
+        console.log(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -103,11 +109,60 @@ const App = () => {
     fetchAdditionalDogs();
   };
 
+
+  const BreedChartData = () => {
+    const breedCount = {};
+  
+    // Assuming you have a 'dogs' array with breed information
+    dogs.forEach((dog) => {
+      const breedName = dog.breeds[0].name;
+      breedCount[breedName] = (breedCount[breedName] || 0) + 1;
+    });
+  
+    // Sort the breeds by frequency in descending order
+    const sortedBreeds = Object.keys(breedCount).sort(
+      (a, b) => breedCount[b] - breedCount[a]
+    );
+  
+    // Select the top three breeds
+    const top3Breeds = sortedBreeds.slice(0, 3);
+  
+    return top3Breeds.map((breed) => ({
+      breed,
+      frequency: breedCount[breed],
+    }));
+  };
+
+  const WeightChartData = () => {
+    const weightCount = {};
+  
+    dogs.forEach((dog) => {
+      const weight = dog.breeds[0].weight.imperial;
+      weightCount[weight] = (weightCount[weight] || 0) + 1;
+    });
+  
+    const sortedWeights = Object.keys(weightCount).sort(
+      (a, b) => weightCount[b] - weightCount[a]
+    );
+  
+    const top3Weights = sortedWeights.slice(0, 3);
+  
+    return top3Weights.map((weight) => ({
+      weight,
+      frequency: weightCount[weight],
+    }));
+  };
+  
+  
+
   return (
+    <BrowserRouter>
     <div className="main_container">
       <div className="header">
+        <Link to="/">
         <h1>Paw-some Dogs!</h1>
         <h4>Discover the coolest dogs in the world!</h4>
+        </Link>
       </div>
 
       <div>
@@ -157,15 +212,34 @@ const App = () => {
 
         </div>
         <button onClick={handleAddMoreDogs}>Add {dogsToAdd} More Dogs</button>
-        <div className="dog-card-container">
+
+        <div className='graphs'>
+          <div>
+            <h3>3 Most Common Dog Breeds</h3>
+            <BreedFrequencyChart data={BreedChartData()} />
+          </div>
+          <div>
+            <h3>3 Most Common Dog Weights (lbs)</h3>
+             <WeightFrequencyChart data = {WeightChartData()} />
+          </div>
+             
+        </div>
+
+        {/* <div className="dog-card-container">
           <ul>
             {filteredDogs.map((dog) => (
               <DogCard key={dog.id} dog={dog} />
             ))}
           </ul>
-        </div>
+        </div> */}
+
       </div>
     </div>
+    <Routes>
+          <Route path="/" element={<DogCard dogs={filteredDogs} />} />
+          <Route path="/detail/:id" element={<DogDetail dogs={dogs} />} />
+        </Routes>
+    </BrowserRouter>
   );
 };
 
